@@ -128,6 +128,7 @@ def gettweettxt(id):
         headers=headers,
     )
     tweeets = json.loads(response.text)
+    jend = 10
     if len(tweeets["data"]["user"]["result"]["timeline_v2"]["timeline"]["instructions"])>2:
         txtpinned = (tweeets["data"]["user"]["result"]["timeline_v2"]["timeline"]["instructions"][2]
         ["entry"]["content"]["itemContent"]["tweet_results"]["result"]["legacy"]["full_text"])
@@ -139,7 +140,6 @@ def gettweettxt(id):
         jend = 9
     lala = json.loads(params["variables"])
     j = 0
-    jend = 10
     for i in range(0,int(lala["count"])):
         if j<jend:
             instr=tweeets["data"]["user"]["result"]["timeline_v2"]["timeline"]["instructions"][1]["entries"][i]["content"]
