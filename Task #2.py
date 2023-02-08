@@ -142,34 +142,26 @@ def gettweettxt(id):
     jend = 10
     for i in range(0,int(lala["count"])):
         if j<jend:
-            if ((tweeets["data"]["user"]["result"]["timeline_v2"]["timeline"]["instructions"][1]
-                ["entries"][i]["content"]["__typename"] == "TimelineTimelineItem") and (tweeets["data"]["user"]
-                ["result"]["timeline_v2"]["timeline"]["instructions"][1]["entries"][i]["content"]["itemContent"]
-                ["tweetDisplayType"]=="Tweet")):
-
+            instr=tweeets["data"]["user"]["result"]["timeline_v2"]["timeline"]["instructions"][1]["entries"][i]["content"]
+            if ((instr["__typename"] == "TimelineTimelineItem")
+                    and (instr["itemContent"]["tweetDisplayType"]=="Tweet")):
                 print(f'{j+1}# Tweet:\n')
-                if (tweeets["data"]["user"]["result"]["timeline_v2"]["timeline"]["instructions"][1]["entries"][i]
-                ["content"]["itemContent"]["tweet_results"]
-                ["result"]["legacy"].get("retweeted_status_result")) is not None:
+                if (instr["itemContent"]["tweet_results"]["result"]
+                ["legacy"].get("retweeted_status_result")) is not None:
 
-                    retweetedfrom = (tweeets["data"]["user"]["result"]["timeline_v2"]["timeline"]["instructions"][1]
-                    ["entries"][i]["content"]["itemContent"]["tweet_results"]
+                    retweetedfrom = (instr["itemContent"]["tweet_results"]
                     ["result"]["legacy"]["full_text"].split(":")[0])
                     print(f'{retweetedfrom}:')
-                    retweetedtxt = (tweeets["data"]["user"]["result"]["timeline_v2"]["timeline"]["instructions"][1]
-                    ["entries"][i]["content"]["itemContent"]["tweet_results"]["result"]
+                    retweetedtxt = (instr["itemContent"]["tweet_results"]["result"]
                     ["legacy"]["retweeted_status_result"]["result"]["legacy"]["full_text"])
                     print(f'{retweetedtxt}\n')
-                    commentname(tweeets["data"]["user"]["result"]["timeline_v2"]["timeline"]["instructions"][1]
-                                ["entries"][i]["content"]["itemContent"]["tweet_results"]["result"]["legacy"]
+                    commentname(instr["itemContent"]["tweet_results"]["result"]["legacy"]
                                 ["retweeted_status_result"]["result"]["legacy"]["id_str"])
                     print(f'{"---" * 100}\n')
                 else:
-                    tweettxt = (tweeets["data"]["user"]["result"]["timeline_v2"]["timeline"]["instructions"][1]
-                    ["entries"][i]["content"]["itemContent"]["tweet_results"]["result"]["legacy"]["full_text"])
+                    tweettxt = (instr["itemContent"]["tweet_results"]["result"]["legacy"]["full_text"])
                     print(f'{tweettxt}\n')
-                    commentname(tweeets["data"]["user"]["result"]["timeline_v2"]["timeline"]["instructions"][1]
-                                ["entries"][i]["content"]["itemContent"]["tweet_results"]["result"]["rest_id"])
+                    commentname(instr["itemContent"]["tweet_results"]["result"]["rest_id"])
                     print(f'{"---" * 100}\n')
                 j+=1
 
