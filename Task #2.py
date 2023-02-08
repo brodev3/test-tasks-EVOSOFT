@@ -21,10 +21,10 @@ headers = {
 }
 
 def getid():
-    influener = input("influener@:")
+    influencer = input("influencer@:")
 
     params = {
-        'variables': '{"screen_name":'+f'"{influener}"'+',"withSafetyModeUserFields":true,' \
+        'variables': '{"screen_name":'+f'"{influencer}"'+',"withSafetyModeUserFields":true,' \
                                                         '"withSuperFollowsUserFields":true}',
         'features': '{"responsive_web_twitter_blue_verified_badge_is_enabled":true,' \
                     '"responsive_web_graphql_exclude_directive_enabled":false,' \
